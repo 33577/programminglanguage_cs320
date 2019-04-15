@@ -26,11 +26,10 @@ package object hw05 extends Homework05 {
       case None => error(s"free identifier: $name")
     }
 
-  def lookupRec(name: String, rec: Map[String, (SRBFAEValue, Sto)]): SRBFAEValue = 
+  def lookupRec(name: String, rec: Map[String, (SRBFAEValue, Sto)]): (SRBFAEValue, Sto) = 
     rec.get(name) match {
       case Some(tuple) => {
-        val (v, s) = tuple
-        v
+        tuple
       }
       case None => error(s"no such field")
     }
@@ -95,11 +94,11 @@ package object hw05 extends Homework05 {
           interp(Seqn(r, rest), env, ls)
         }
       }
-    case Rec(fields) => (RecV(fields.map{ case (s, e) => (s, interp(e, env, sto))}), sto)
+    case Rec(fields) => ( RecV(fields.map{ case (s, e) => (s, interp(e, env, sto))}), sto)
     case Get(record, field) => {
       val (rv, rs) = interp(record, env, sto)
       rv match {
-            case RecV(rec) => (lookupRec(field, rec), rs)
+            case RecV(rec) => lookupRec(field, rec)
             case _ =>  error(s"not a record: $rv")
       }
     }
@@ -111,8 +110,9 @@ package object hw05 extends Homework05 {
           recV match {
             case RecV(rec) => {
               val (ev, es) = interp(expr, env, sto)
+              val (originalV, originalS) = lookupRec(field, rec) // to produce error I don't use result .. I need more fancy way
               val newRecV = RecV(rec+(field -> (ev, es)))
-              (newRecV, es + (addr -> newRecV))
+              (ev, es + (addr -> newRecV))
             }
             case _ => error(s"not a record: $recV")
           }
@@ -122,8 +122,8 @@ package object hw05 extends Homework05 {
           rv match {
             case RecV(rec) => {
               val (ev, es) = interp(expr, env, rs)
-              val newRecV = RecV(rec+(field -> (ev, es)))
-              (newRecV, es)
+              val (originalV, originalS) = lookupRec(field, rec) // to produce error I don't use result 
+              (ev, es)
             }
             case _ =>  error(s"not a record: $rv")
           }
@@ -152,27 +152,36 @@ package object hw05 extends Homework05 {
                           {setbox b {+ 4 {openbox b}}}
                           {openbox b}}}
                 {newbox 1}}"""), "10")
-    // testExc(run("{get {rec {x 1}} y}"), "no such field")
+    testExc(run("{get {rec {x 1}} y}"), "no such field")
     test(run("{{fun {r} {seqn {set r x 5} {get r x}}} {rec {x 1}}}"), "5")
     test(run("42"), "42")
     test(run("{fun {x} x}"), "function")
     test(run("{newbox 1}"), "box")
-    // test(run("{rec}"), "record")
+    test(run("{rec}"), "record")
 
     /* Write your own tests */
     test(run("{openbox {newbox 2}}"), "2")
-    // test(run("{ {fun {x} {setbox b}} 2 }"}))
+    test(run("{openbox {newbox {+ 1 1}}}"), "2")
     test(run("{setbox {newbox 2} 5}"), "5")
     test(run("""{ { fun {b} {seqn { setbox b {+ 1 {openbox b}} } 
                               {openbox b} } } 
                 {newbox 1} }"""), "2")
     test(run("{get {rec { x 1 }} x}"), "1")
+    test(run("{get {rec { x {+ 1 1 } }} x}"), "2")
     test(run("{{fun {r} {get r x}} {rec {x 1}}}"), "1")
-    test(run("{{fun {r} {set r x 5}} {rec {x 1}}}"), "record")
-    test(run("{get { set {rec {x 1}} x 5 } x}"), "5")
-    test(run("{get { set { set {rec {x 1}} x 5 } x 10 } x}"), "10")
+    test(run("{{fun {r} {set r x 5}} {rec {x 1}}}"), "5")
+    test(run("{ set {rec {x 1}} x 5 } "), "5")
     testExc(run("{{fun {r} {get s x}} {rec {x 1}}}"), "free identifier: s")
     testExc(run("{{fun {r} {get r y}} {rec {x 1}}}"), "no such field")
+    testExc(run("{ set {rec {x 1}} y 5 }"), "no such field")
+    testExc(run("{{fun {r} {set r y 5}} {rec {x 1}}}"), "no such field")
+
+    /* piazza */
+    test(run("{openbox {get {rec {x {newbox 12}}} x}}"), "12")
+    test(run("{{fun {r} {seqn {set r x {newbox 8}} {get r x}}} {rec {x {newbox 7}}} }"), "box")
+    test(run(" { openbox {{  fun {b} { get { rec { x {setbox b 3} } {y b}  }  y } }  {newbox 1}} } "), "1") // 근데 난 이게 3이라고 생각하지 않아
+    test(run("{{fun {x} {get {rec {x 1} {y 2} {z 3}} x}} {newbox 8}}"), "1")
+
 
   }
 }
