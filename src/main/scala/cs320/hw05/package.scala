@@ -179,7 +179,7 @@ package object hw05 extends Homework05 {
     /* piazza */
     test(run("{openbox {get {rec {x {newbox 12}}} x}}"), "12")
     test(run("{{fun {r} {seqn {set r x {newbox 8}} {get r x}}} {rec {x {newbox 7}}} }"), "box")
-    test(run(" { openbox {{  fun {b} { get { rec { x {setbox b 3} } {y b}  }  y } }  {newbox 1}} } "), "1") // 근데 난 이게 3이라고 생각하지 않아
+    test(run(" { openbox {{  fun {b} { get { rec { x {setbox b 3} } {y b}  }  y } }  {newbox 1}} } "), "3") // 아.. 
     test(run("{{fun {x} {get {rec {x 1} {y 2} {z 3}} x}} {newbox 8}}"), "1")
 
 

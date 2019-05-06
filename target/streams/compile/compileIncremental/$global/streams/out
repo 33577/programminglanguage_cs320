@@ -1,134 +1,31 @@
 [0m[[0mdebug[0m] [0m[naha] [0m
 [0m[[0mdebug[0m] [0m[naha] Initial source changes: [0m
 [0m[[0mdebug[0m] [0m[naha] 	removed:Set()[0m
-[0m[[0mdebug[0m] [0m[naha] 	added: Set(/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/Homework03.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/package.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/Homework01.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/Homework02.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/Homework.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/package.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/package.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/Homework05.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/package.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] 	modified: Set()[0m
+[0m[[0mdebug[0m] [0m[naha] 	added: Set()[0m
+[0m[[0mdebug[0m] [0m[naha] 	modified: Set(/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw07/package.scala)[0m
 [0m[[0mdebug[0m] [0m[naha] Invalidated products: Set()[0m
 [0m[[0mdebug[0m] [0m[naha] External API changes: API Changes: Set()[0m
 [0m[[0mdebug[0m] [0m[naha] Modified binary dependencies: Set()[0m
-[0m[[0mdebug[0m] [0m[naha] Initial directly invalidated sources: Set(/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/Homework03.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/package.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/Homework01.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/Homework02.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/Homework.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/package.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/package.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/Homework05.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/package.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] Initial directly invalidated sources: Set(/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw07/package.scala)[0m
 [0m[[0mdebug[0m] [0m[naha] [0m
 [0m[[0mdebug[0m] [0m[naha] Sources indirectly invalidated by:[0m
 [0m[[0mdebug[0m] [0m[naha] 	product: Set()[0m
 [0m[[0mdebug[0m] [0m[naha] 	binary dep: Set()[0m
 [0m[[0mdebug[0m] [0m[naha] 	external source: Set()[0m
-[0m[[0mdebug[0m] [0mAll initially invalidated sources: Set(/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/Homework03.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/package.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/Homework01.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/Homework02.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/Homework.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/package.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/package.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/Homework05.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/package.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/Homework03.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/package.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/Homework01.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/Homework02.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/Homework.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/package.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/package.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/Homework05.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/package.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] Recompiling all 9 sources: invalidated sources (9) exceeded 50.0% of all sources[0m
-[0m[[0minfo[0m] [0mCompiling 9 Scala sources to /Users/jeonjong/kaistlecture/pl_cs320/hw/target/scala-2.12/classes...[0m
+[0m[[0mdebug[0m] [0mAll initially invalidated sources: Set(/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw07/package.scala)[0m
+[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw07/package.scala)[0m
+[0m[[0minfo[0m] [0mCompiling 1 Scala source to /Users/jeonjong/kaistlecture/pl_cs320/hw/target/scala-2.12/classes...[0m
 [0m[[0mdebug[0m] [0mGetting org.scala-sbt:compiler-interface:0.13.17:component from component compiler for Scala 2.12.8[0m
 [0m[[0mdebug[0m] [0mGetting org.scala-sbt:compiler-interface:0.13.17:component from component compiler for Scala 2.12.8[0m
-[0m[[0mdebug[0m] [0mRunning cached compiler 101403c6, interfacing (CompilerInterface) with Scala compiler version 2.12.8[0m
+[0m[[0mdebug[0m] [0mRunning cached compiler 1438e4c1, interfacing (CompilerInterface) with Scala compiler version 2.12.8[0m
 [0m[[0mdebug[0m] [0mCalling Scala compiler with arguments  (CompilerInterface):[0m
 [0m[[0mdebug[0m] [0m	-bootclasspath[0m
 [0m[[0mdebug[0m] [0m	/Users/jeonjong/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.12.8.jar[0m
 [0m[[0mdebug[0m] [0m	-classpath[0m
 [0m[[0mdebug[0m] [0m	/Users/jeonjong/kaistlecture/pl_cs320/hw/target/scala-2.12/classes:/Users/jeonjong/.ivy2/cache/org.scala-lang.modules/scala-parser-combinators_2.12/bundles/scala-parser-combinators_2.12-1.1.0.jar[0m
-[0m[[33mwarn[0m] [0m/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/package.scala:25: patterns after a variable pattern cannot match (SLS 8.1.1)[0m
-[0m[[33mwarn[0m] [0mIf you intended to match against method add in package object hw02, you must use backticks, like: case `add` =>[0m
-[0m[[33mwarn[0m] [0m        case add => add(l, r)[0m
-[0m[[33mwarn[0m] [0m             ^[0m
-[0m[[33mwarn[0m] [0m/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/package.scala:26: unreachable code due to variable pattern 'add' on line 25[0m
-[0m[[33mwarn[0m] [0mIf you intended to match against method sub in package object hw02, you must use backticks, like: case `sub` =>[0m
-[0m[[33mwarn[0m] [0m        case sub => sub(l, r)[0m
-[0m[[33mwarn[0m] [0m                       ^[0m
-[0m[[33mwarn[0m] [0mthere were two feature warnings; re-run with -feature for details[0m
-[0m[[33mwarn[0m] [0mthree warnings found[0m
-[0m[[0mdebug[0m] [0mScala compilation took 9.848804987 s[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/Homework02.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/Homework02.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/Homework02.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] Including /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/package.scala by /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/Homework02.scala[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/package.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/Homework02.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] The /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/Homework02.scala source file has the following implicit definitions changed:[0m
-[0m[[0mdebug[0m] [0m[naha] 	literal, accept, regex.[0m
-[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
-[0m[[0mdebug[0m] [0m[naha] The following member ref dependencies of /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/Homework02.scala are invalidated:[0m
-[0m[[0mdebug[0m] [0m[naha] 	/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/package.scala[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/package.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/package.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/package.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/package.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] The /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/package.scala source file has the following regular definitions changed:[0m
-[0m[[0mdebug[0m] [0m[naha] 	alertOnlyFail, notify, unapply, curried, test, package, printStackTrace, numOfHomework, getLocalizedMessage, wait, copy$default$2, $asInstanceOf, CS330, compose, productArity, PLError, equals, fillInStackTrace, initCause, asInstanceOf, CS311, synchronized, namePets, tests, giveName, $isInstanceOf, andThen, getCause, tupled, canEqual, productPrefix, notifyAll, quiz, isInstanceOf, isOdd, getStackTrace, <init>, getMessage, setStackTrace, cast, apply, error, getSuppressed, volumeOfCuboid, ==, clone, addSuppressed, $init$, homework, copy, hasProjects, toString, msg, !=, projects, getClass, copy$default$1, testExc, COURSE, ne, lcm, CS320, dollar2won, eq, productIterator, ##, finalize, productElement, hashCode, isEven, gcd.[0m
-[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/Homework.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/Homework.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/Homework.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] Including /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/Homework03.scala by /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/Homework.scala[0m
-[0m[[0mdebug[0m] [0m[naha] Including /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/package.scala by /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/Homework03.scala[0m
-[0m[[0mdebug[0m] [0m[naha] Including /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/Homework05.scala by /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/Homework.scala[0m
-[0m[[0mdebug[0m] [0m[naha] Including /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/package.scala by /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/Homework05.scala[0m
-[0m[[0mdebug[0m] [0m[naha] Including /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/Homework02.scala by /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/Homework.scala[0m
-[0m[[0mdebug[0m] [0m[naha] Including /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/package.scala by /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/Homework02.scala[0m
-[0m[[0mdebug[0m] [0m[naha] Including /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/Homework01.scala by /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/Homework.scala[0m
-[0m[[0mdebug[0m] [0m[naha] Including /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/package.scala by /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/Homework01.scala[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/Homework03.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/package.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/Homework01.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/Homework02.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/Homework.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/package.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/package.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/Homework05.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/package.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] The /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/Homework.scala source file has the following regular definitions changed:[0m
-[0m[[0mdebug[0m] [0m[naha] 	alertOnlyFail, notify, unapply, test, printStackTrace, getLocalizedMessage, wait, $asInstanceOf, compose, Homework, productArity, PLError, equals, fillInStackTrace, initCause, asInstanceOf, synchronized, tests, $isInstanceOf, andThen, getCause, canEqual, productPrefix, notifyAll, isInstanceOf, getStackTrace, <init>, getMessage, setStackTrace, cast, apply, error, getSuppressed, ==, clone, addSuppressed, $init$, copy, toString, msg, !=, getClass, copy$default$1, testExc, ne, eq, productIterator, ##, finalize, productElement, hashCode.[0m
-[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
-[0m[[0mdebug[0m] [0m[naha] The following modified names cause invalidation of /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/package.scala: Set(test, asInstanceOf, isInstanceOf, <init>, apply, error, ==, toString, !=, testExc, ne, eq)[0m
-[0m[[0mdebug[0m] [0m[naha] The following modified names cause invalidation of /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/package.scala: Set(test, asInstanceOf, isInstanceOf, <init>, apply, ==, !=)[0m
-[0m[[0mdebug[0m] [0m[naha] The following modified names cause invalidation of /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/package.scala: Set(test, asInstanceOf, isInstanceOf, <init>, apply, error, ==)[0m
-[0m[[0mdebug[0m] [0m[naha] The following modified names cause invalidation of /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/Homework03.scala: Set(Homework, asInstanceOf, isInstanceOf, <init>, error, ==, toString, ne, eq)[0m
-[0m[[0mdebug[0m] [0m[naha] The following modified names cause invalidation of /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/package.scala: Set(test, asInstanceOf, isInstanceOf, <init>, apply, error, ==)[0m
-[0m[[0mdebug[0m] [0m[naha] The following modified names cause invalidation of /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/Homework01.scala: Set(Homework, asInstanceOf, isInstanceOf, <init>, ==, toString, eq)[0m
-[0m[[0mdebug[0m] [0m[naha] The following modified names cause invalidation of /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/Homework02.scala: Set(Homework, asInstanceOf, isInstanceOf, <init>, apply, error, ==, toString, ne, eq)[0m
-[0m[[0mdebug[0m] [0m[naha] The following modified names cause invalidation of /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/package.scala: Set(test, asInstanceOf, isInstanceOf, <init>, apply, ==, !=)[0m
-[0m[[0mdebug[0m] [0m[naha] The following modified names cause invalidation of /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/package.scala: Set(test, asInstanceOf, isInstanceOf, <init>, apply, error, ==, toString, !=, testExc, ne, eq)[0m
-[0m[[0mdebug[0m] [0m[naha] The following modified names cause invalidation of /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/Homework05.scala: Set(Homework, asInstanceOf, isInstanceOf, <init>, apply, error, ==, toString, ne, eq)[0m
-[0m[[0mdebug[0m] [0m[naha] The following modified names cause invalidation of /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/package.scala: Set(test, asInstanceOf, isInstanceOf, <init>, apply, error, ==, toString, testExc, ne, eq)[0m
-[0m[[0mdebug[0m] [0m[naha] The following modified names cause invalidation of /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/package.scala: Set(test, asInstanceOf, isInstanceOf, <init>, apply, error, ==, toString, testExc, ne, eq)[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/package.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/package.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/package.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/package.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] The /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/package.scala source file has the following implicit definitions changed:[0m
-[0m[[0mdebug[0m] [0m[naha] 	literal, accept, regex.[0m
-[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/Homework01.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/Homework01.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/Homework01.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] Including /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/package.scala by /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/Homework01.scala[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/Homework01.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/package.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] The /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/Homework01.scala source file has the following regular definitions changed:[0m
-[0m[[0mdebug[0m] [0m[naha] 	alertOnlyFail, notify, unapply, curried, test, printStackTrace, numOfHomework, getLocalizedMessage, wait, copy$default$2, $asInstanceOf, CS330, compose, productArity, PLError, equals, fillInStackTrace, initCause, asInstanceOf, CS311, synchronized, namePets, tests, giveName, $isInstanceOf, andThen, getCause, tupled, canEqual, productPrefix, notifyAll, quiz, isInstanceOf, isOdd, getStackTrace, <init>, getMessage, setStackTrace, cast, apply, error, getSuppressed, volumeOfCuboid, ==, clone, addSuppressed, $init$, homework, copy, hasProjects, toString, msg, !=, projects, getClass, copy$default$1, testExc, COURSE, ne, lcm, CS320, dollar2won, eq, productIterator, Homework01, ##, finalize, productElement, hashCode, isEven, gcd.[0m
-[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
-[0m[[0mdebug[0m] [0m[naha] The following modified names cause invalidation of /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw01/package.scala: Set(test, numOfHomework, CS330, asInstanceOf, CS311, namePets, giveName, isInstanceOf, isOdd, <init>, apply, volumeOfCuboid, ==, homework, hasProjects, !=, projects, COURSE, lcm, CS320, dollar2won, Homework01, isEven, gcd)[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/package.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/package.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/package.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/package.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] The /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/package.scala source file has the following implicit definitions changed:[0m
-[0m[[0mdebug[0m] [0m[naha] 	literal, accept, regex.[0m
-[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/Homework05.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/Homework05.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/Homework05.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] Including /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/package.scala by /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/Homework05.scala[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/package.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/Homework05.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] The /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/Homework05.scala source file has the following implicit definitions changed:[0m
-[0m[[0mdebug[0m] [0m[naha] 	literal, accept, regex.[0m
-[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
-[0m[[0mdebug[0m] [0m[naha] The following member ref dependencies of /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/Homework05.scala are invalidated:[0m
-[0m[[0mdebug[0m] [0m[naha] 	/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw05/package.scala[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/Homework03.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/Homework03.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/Homework03.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] Including /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/package.scala by /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/Homework03.scala[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/package.scala, /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/Homework03.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] The /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/Homework03.scala source file has the following implicit definitions changed:[0m
-[0m[[0mdebug[0m] [0m[naha] 	literal, accept, regex.[0m
-[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
-[0m[[0mdebug[0m] [0m[naha] The following member ref dependencies of /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/Homework03.scala are invalidated:[0m
-[0m[[0mdebug[0m] [0m[naha] 	/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw03/package.scala[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/package.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidating (transitively) by inheritance from /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/package.scala...[0m
-[0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set(/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/package.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] Invalidated by transitive inheritance dependency: Set(/Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/package.scala)[0m
-[0m[[0mdebug[0m] [0m[naha] The /Users/jeonjong/kaistlecture/pl_cs320/hw/src/main/scala/cs320/hw02/package.scala source file has the following implicit definitions changed:[0m
-[0m[[0mdebug[0m] [0m[naha] 	literal, accept, regex.[0m
-[0m[[0mdebug[0m] [0m[naha] All member reference dependencies will be considered within this context.[0m
+[0m[[33mwarn[0m] [0mthere was one feature warning; re-run with -feature for details[0m
+[0m[[33mwarn[0m] [0mone warning found[0m
+[0m[[0mdebug[0m] [0mScala compilation took 0.575199793 s[0m
 [0m[[0mdebug[0m] [0m[naha] New invalidations:[0m
 [0m[[0mdebug[0m] [0m[naha] 	Set()[0m
 [0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set()[0m
