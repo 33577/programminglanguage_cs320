@@ -17,7 +17,7 @@
 [0m[[0minfo[0m] [0mCompiling 1 Scala source to /Users/jeonjong/kaistlecture/pl_cs320/hw/target/scala-2.12/classes...[0m
 [0m[[0mdebug[0m] [0mGetting org.scala-sbt:compiler-interface:0.13.17:component from component compiler for Scala 2.12.8[0m
 [0m[[0mdebug[0m] [0mGetting org.scala-sbt:compiler-interface:0.13.17:component from component compiler for Scala 2.12.8[0m
-[0m[[0mdebug[0m] [0mRunning cached compiler 60f08d6, interfacing (CompilerInterface) with Scala compiler version 2.12.8[0m
+[0m[[0mdebug[0m] [0mRunning cached compiler 7dd6c899, interfacing (CompilerInterface) with Scala compiler version 2.12.8[0m
 [0m[[0mdebug[0m] [0mCalling Scala compiler with arguments  (CompilerInterface):[0m
 [0m[[0mdebug[0m] [0m	-bootclasspath[0m
 [0m[[0mdebug[0m] [0m	/Users/jeonjong/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.12.8.jar[0m
@@ -25,7 +25,7 @@
 [0m[[0mdebug[0m] [0m	/Users/jeonjong/kaistlecture/pl_cs320/hw/target/scala-2.12/classes:/Users/jeonjong/.ivy2/cache/org.scala-lang.modules/scala-parser-combinators_2.12/bundles/scala-parser-combinators_2.12-1.1.0.jar[0m
 [0m[[33mwarn[0m] [0mthere was one feature warning; re-run with -feature for details[0m
 [0m[[33mwarn[0m] [0mone warning found[0m
-[0m[[0mdebug[0m] [0mScala compilation took 0.530420505 s[0m
+[0m[[0mdebug[0m] [0mScala compilation took 0.662667148 s[0m
 [0m[[0mdebug[0m] [0m[naha] New invalidations:[0m
 [0m[[0mdebug[0m] [0m[naha] 	Set()[0m
 [0m[[0mdebug[0m] [0m[naha] Initial set of included nodes: Set()[0m
