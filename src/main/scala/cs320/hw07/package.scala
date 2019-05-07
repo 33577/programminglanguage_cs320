@@ -17,11 +17,14 @@ package object hw07 extends Homework07 {
   val numAdd = numOp(_ + _)
   val numSub = numOp(_ - _)
 
-  // find name in env. If there is, return value of name. Else, then raise error.
+  // find name in env. If there is, imthrow value of name. Else, then raise error.
   def lookup(name: String, env: Env): KXCFAEValue = 
     env.get(name) match {
       case Some(v) => v
-      case None => error(s"free identifier: $name")
+      case None => {
+        if(name=="imthrow") error(s"no enclosing try-catch")
+        error(s"free identifier: $name")
+      }
     }
 
   def interp(KXCFAE: KXCFAE, env: Env, k: Cont): KXCFAEValue = KXCFAE match {
@@ -41,7 +44,12 @@ package object hw07 extends Homework07 {
                         help(List(), args, env, fv, k)
       )
     case Withcc(name, body) => interp(body, env+(name->ContV(k)), k)
-
+    case Try(tryE, catchE) => interp(Withcc("imthrow", tryE), env, tryV => {
+                                                                          if(tryV!=NumV(4164166)) k(tryV)
+                                                                          else interp(catchE, env, catchV => k(catchV))
+    } )
+    case Throw => interp(App(Id("imthrow"), List(Num(4164166))), env, k)
+    
   }
 
   def help(previousValueList: List[KXCFAEValue], remainExprList: List[KXCFAE], env: Env, fv: KXCFAEValue, k: Cont): KXCFAEValue = remainExprList match {
@@ -53,7 +61,9 @@ package object hw07 extends Homework07 {
           case CloV(params, body, fenv) => 
             if (params.size != previousValueList.size ) error(s"wrong arity")
             interp(body, fenv ++ (params zip previousValueList toMap ), k)
-          case ContV(kv) => kv(previousValueList(0))                                  // 아 이거 어카냐 ㅋㅋ
+          case ContV(kv) => 
+            if (previousValueList.size != 1 ) error(s"wrong arity")
+            kv(previousValueList(0))                                 
           case v => error(s"Not a closure or Continuation: $v")
     }
   }
@@ -75,12 +85,16 @@ package object hw07 extends Homework07 {
     testExc(run("{{fun {x y} 1} 2}"), "wrong arity")
     test(run("{withcc esc {{fun {x y} x} 1 {esc 3}}}"), "3")
 
-    // test(run("{try 1 catch 2}"), "1")
-    // test(run("{try {throw} catch 2}"), "2")
-    // test(run("{try {+ 1 {throw}} catch 2}"), "2")
-    // test(run("{{fun {f} {try {f} catch 1}} {fun {} {throw}}}"), 1) testExc(run("{throw}"), "no enclosing try-catch")
+    test(run("{try 1 catch 2}"), "1")
+    test(run("{try {throw} catch 2}"), "2")         // Try(Throw, Num(2))
+    test(run("{try {+ 1 {throw}} catch 2}"), "2")   // Try(Add(Num(1), Throw), Num(2))
+    test(run("{{fun {f} {try {f} catch 1}} {fun {} {throw}}}"), 1) 
+    testExc(run("{throw}"), "no enclosing try-catch")
+
     /* Write your own tests */
-    test(run("{withcc esc {{fun {x y} x} 1 {esc 3 5}}}"), "3 5")
+    testExc(run("{withcc esc {esc 3 5}}"), "wrong arity")
     test(run("{+ 1 {withcc k {{fun {x y} {+ x y}} {k 2} 4}}}"), "3")
+
+    // testExc(run("{try {throw}}"), "no enclosing try-catch")
   }
 }
