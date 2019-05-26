@@ -39,8 +39,10 @@ package object hw09 extends Homework09 {
   def same(left: Type, right: Type): Boolean =
     (left, right) match {
       case (NumT, NumT) => true
+      case (BoolT, BoolT) => true
       case (ArrowT(p1, r1), ArrowT(p2, r2)) =>
         same(p1, p2) && same(r1, r2)
+      case (IdT(x), IdT(y)) => x==y
       case _ => false
     }
   
@@ -56,10 +58,7 @@ package object hw09 extends Homework09 {
   def lookup(name: String, env: Env): CORELValue = 
     env.get(name) match {
       case Some(v) => v
-      case None => {
-        if (name=="throw") error(s"no enclosing try-catch")
-        else error(s"free identifier: $name")
-      }
+      case None => error(s"free identifier: $name")
     }
 
   def typeCheckwithTyEnv(corel: COREL, tyEnv: TypeEnv): Type = corel match {
@@ -77,8 +76,9 @@ package object hw09 extends Homework09 {
       mustSame(typeCheckwithTyEnv(l, tyEnv), NumT)
       mustSame(typeCheckwithTyEnv(r, tyEnv), NumT)
       BoolT
+    case With(name, t, expr, body) => typeCheckwithTyEnv(body, tyEnv.addVar(name, t))
     case Id(x) => tyEnv.vars.getOrElse(x, notype(s"$x is a free identifier")) // tbinds에 x가 있는 경우는 체크 안 해도 되나? 
-    case Fun(p, pt, b) => ArrowT(pt, typeCheckwithTyEnv(b, tyEnv))
+    case Fun(p, pt, b) => ArrowT(pt, typeCheckwithTyEnv(b, tyEnv.addVar(p, pt)))
     case App(f, a) =>
       val funT = typeCheckwithTyEnv(f, tyEnv)
       val argT = typeCheckwithTyEnv(a, tyEnv)
@@ -101,14 +101,14 @@ package object hw09 extends Homework09 {
       val tyEnvV = tyEnvT.addVarsFromMap(constructors map { case (v, t) => (v, ArrowT(t, IdT(name))) })
       typeCheckwithTyEnv(body, tyEnvV)
     case Cases(name, dispatchE, cases) =>  
-      val cs = tyEnv.tbinds.getOrElse(name, notype(s"$name is a free type"))
+      val cs = tyEnv.tbinds.getOrElse(name, notype(s"[TC/tbinds] $name is a free type"))
       mustSame(typeCheckwithTyEnv(dispatchE, tyEnv), IdT(name))
 
       val returnTypes: List[Type] = cases.map { 
-        case (x, (v, e)) => typeCheckwithTyEnv(e, tyEnv.addVar(x, cs.getOrElse(v, notype(s"$v is a free type"))))} toList
+        case (x, (v, e)) => typeCheckwithTyEnv(e, tyEnv.addVar(v, cs.getOrElse(x, notype(s"[TC] $x is a free type"))))} toList
       // check every returnTypes[i] is same with returnTypes[i-1]
       
-      val x = 2 // 의미없는 거 근데 이 줄이 없으면 에러 남  왜?
+      val kkk = 2 // 의미없는 거 근데 이 줄이 없으면 에러 남  왜?
       mustSameList(returnTypes)
       
   }
@@ -119,15 +119,15 @@ package object hw09 extends Homework09 {
     case Add(left, right) => numAdd(e2v(left, env), e2v(right, env))
     case Sub(left, right) => numSub(e2v(left, env), e2v(right, env))
     case Equ(left, right) => BoolV(e2v(left, env) == e2v(right, env))
-    case With(name, ty, expr, body) => e2v(body, env + (name -> e2v(expr, env)))
+    case With(name, _, expr, body) => e2v(body, env + (name -> e2v(expr, env)))
     case Id(name) => lookup(name, env)
-    case Fun(param, paramty, body) => CloV(param, body, env)
+    case Fun(param, _, body) => CloV(param, body, env)
     case App(f, a) => 
       val fv = e2v(f, env)
       fv match {
         case CloV(param, body, fenv) => e2v(body, fenv + (param -> e2v(a, env)))
         case ConstructorV(name) => VariantV(name, e2v(a, env))
-        case v => error(s"not a closure: $v")
+        case v => error(s"not a closure or constructor: $v")
       }
     case IfThenElse(ce, te, ee) => 
       val cond = e2v(ce, env)
