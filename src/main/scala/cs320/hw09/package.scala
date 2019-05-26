@@ -61,6 +61,16 @@ package object hw09 extends Homework09 {
       case None => error(s"free identifier: $name")
     }
 
+  def validType(ty: Type, tyEnv: TypeEnv): Type = ty match {
+    case NumT => ty
+    case BoolT => ty
+    case ArrowT(p, r) =>
+      ArrowT(validType(p, tyEnv), validType(r, tyEnv))
+    case IdT(x) =>
+      if (tyEnv.tbinds.contains(x)) ty
+      else notype(s"$x is a free type")
+  }
+
   def typeCheckwithTyEnv(corel: COREL, tyEnv: TypeEnv): Type = corel match {
     case Num(_) => NumT
     case Bool(_) => BoolT
@@ -76,9 +86,13 @@ package object hw09 extends Homework09 {
       mustSame(typeCheckwithTyEnv(l, tyEnv), NumT)
       mustSame(typeCheckwithTyEnv(r, tyEnv), NumT)
       BoolT
-    case With(name, t, expr, body) => typeCheckwithTyEnv(body, tyEnv.addVar(name, t))
+    case With(name, t, expr, body) => 
+      validType(t, tyEnv)
+      typeCheckwithTyEnv(body, tyEnv.addVar(name, t))
     case Id(x) => tyEnv.vars.getOrElse(x, notype(s"$x is a free identifier")) // tbinds에 x가 있는 경우는 체크 안 해도 되나? 
-    case Fun(p, pt, b) => ArrowT(pt, typeCheckwithTyEnv(b, tyEnv.addVar(p, pt)))
+    case Fun(p, pt, b) => 
+      validType(pt, tyEnv)
+      ArrowT(pt, typeCheckwithTyEnv(b, tyEnv.addVar(p, pt)))
     case App(f, a) =>
       val funT = typeCheckwithTyEnv(f, tyEnv)
       val argT = typeCheckwithTyEnv(a, tyEnv)
@@ -89,8 +103,10 @@ package object hw09 extends Homework09 {
       }
     case IfThenElse(ce, te, ee) => 
       mustSame(typeCheckwithTyEnv(ce, tyEnv), BoolT)
-      mustSame(typeCheckwithTyEnv(te, tyEnv), typeCheckwithTyEnv(te, tyEnv))
+      mustSame(typeCheckwithTyEnv(te, tyEnv), typeCheckwithTyEnv(ee, tyEnv))
     case Rec(fname, fty, pname, pty, body) =>
+      validType(fty, tyEnv)
+      validType(pty, tyEnv)
       val newTyEnv = TypeEnv(tyEnv.vars + (fname->fty) + (pname->pty), tyEnv.tbinds)
       mustSame(fty, ArrowT(pty, 
                               typeCheckwithTyEnv(body, newTyEnv)))
@@ -98,18 +114,23 @@ package object hw09 extends Homework09 {
       val tyEnvT = tyEnv.addTBind(name, constructors)
       // val newTyEnv = TypeEnv( tyEnvT.vars ++ constructors map { case (v, t) => (v, ArrowT(t, IdT(name)))}, tyEnvT.tbinds )
       // typeCheckwithTyEnv(body, newTyEnv)
-      val tyEnvV = tyEnvT.addVarsFromMap(constructors map { case (v, t) => (v, ArrowT(t, IdT(name))) })
+      val tyEnvV = tyEnvT.addVarsFromMap(constructors map { case (v, t) => 
+        validType(t, tyEnv);
+        (v, ArrowT(t, IdT(name))) 
+      })
       typeCheckwithTyEnv(body, tyEnvV)
     case Cases(name, dispatchE, cases) =>  
       val cs = tyEnv.tbinds.getOrElse(name, notype(s"[TC/tbinds] $name is a free type"))
       mustSame(typeCheckwithTyEnv(dispatchE, tyEnv), IdT(name))
 
-      val returnTypes: List[Type] = cases.map { 
+      val returnTypes: List[Type] = cases.map { // (x, (v, e)) (variant, (param, body))
         case (x, (v, e)) => typeCheckwithTyEnv(e, tyEnv.addVar(v, cs.getOrElse(x, notype(s"[TC] $x is a free type"))))} toList
-      // check every returnTypes[i] is same with returnTypes[i-1]
       
-      val kkk = 2 // 의미없는 거 근데 이 줄이 없으면 에러 남  왜?
-      mustSameList(returnTypes)
+      // not all cases 
+      if (cs.size != cases.size) error(s"not all cases")
+
+      mustSameList(returnTypes) // check every returnTypes[i] is same with returnTypes[i-1]
+
       
   }
 
@@ -154,13 +175,18 @@ package object hw09 extends Homework09 {
     e2v(COREL(str), Map()) match {
       case NumV(n) => n.toString
       case BoolV(b) => b.toString
-      case CloV(param, body, env) => "function"
+      case CloV(_,_,_) => "function"
+      case VariantV(_, _) => "variant"
+      case ConstructorV(_) => "constructor"
     }
   }
   
 
-
-
+  // for type test 
+  // def ));test(true, same(typeCheck(expr: String, ty: String): Unit =
+  //   test(same(typeCheck(expr), Type(ty)), true)
+  // def typeTestExc(expr: String): Unit =
+  //   testExc(typeCheck(expr), "")
 
   def tests: Unit = {
     test(run("42"), "42")
@@ -197,6 +223,33 @@ package object hw09 extends Homework09 {
                {banana num}}
         {cases fruit {apple 1}
                {apple {x} {+ x 1}}
-               {banana {y} y}}}"""), "1")
+               {banana {y} y}}}"""), "2")
+    test(run("""
+      {withtype
+        {fruit {apple num}
+               {banana num}
+               {gam bool}}
+        {cases fruit {gam true}
+               {apple {x} false}
+               {banana {y} false}
+               {gam {x} x}
+               }}"""), "true")
+    testExc(run("""
+      {withtype
+        {fruit {apple num}
+               {banana num}
+               {gam bool}}
+        {cases fruit {gam true}
+               {apple {x} {+ x 1}}
+               {banana {y} y}
+               {gam {x} x}
+               }}"""), "no type")
+    testExc(run("{fun {x: a} x}"), "no type")
+    testExc(run("{if true 1 false}"), "no type")
+    test(run("{withtype {fruit {apple num}} apple}"), "constructor") // error 인가?
+    test(run("{{recfun {f: {num -> num} x: num} {if {= x 0} 0 {+ x {f {- x 1}}}}} 10}"), "55")
+
+
+    
   }
 }
