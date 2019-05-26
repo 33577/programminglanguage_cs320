@@ -76,7 +76,7 @@ package object hw09 extends Homework09 {
     case Equ(l, r) => 
       mustSame(typeCheckwithTyEnv(l, tyEnv), NumT)
       mustSame(typeCheckwithTyEnv(r, tyEnv), NumT)
-      NumT
+      BoolT
     case Id(x) => tyEnv.vars.getOrElse(x, notype(s"$x is a free identifier")) // tbinds에 x가 있는 경우는 체크 안 해도 되나? 
     case Fun(p, pt, b) => ArrowT(pt, typeCheckwithTyEnv(b, tyEnv))
     case App(f, a) =>
@@ -107,6 +107,8 @@ package object hw09 extends Homework09 {
       val returnTypes: List[Type] = cases.map { 
         case (x, (v, e)) => typeCheckwithTyEnv(e, tyEnv.addVar(x, cs.getOrElse(v, notype(s"$v is a free type"))))} toList
       // check every returnTypes[i] is same with returnTypes[i-1]
+      
+      val x = 2 // 의미없는 거 근데 이 줄이 없으면 에러 남  왜?
       mustSameList(returnTypes)
       
   }
