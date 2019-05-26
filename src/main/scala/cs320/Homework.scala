@@ -11,7 +11,7 @@ trait Homework {
   }
 
   // pass/fail
-  var alertOnlyFail: Boolean = true
+  var alertOnlyFail: Boolean = false
   
   private def pass: Unit = if (!alertOnlyFail)
     println(s"PASS [$getCSInfo]")

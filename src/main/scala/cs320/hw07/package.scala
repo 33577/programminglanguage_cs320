@@ -28,19 +28,20 @@ package object hw07 extends Homework07 {
       }
     }
 
+  /*
+  denv는 dynamic scope로 try catch에서 쓰인다. 
+  */
   def interp(KXCFAE: KXCFAE, env: Env, denv: Env, k: Cont): KXCFAEValue = KXCFAE match {
     case Num(num) => k(NumV(num))
     case Add(l, r) => 
-      interp(l, env, denv, lv => {
-                        interp(r, env, denv, rv => {
+      interp(l, env, denv, lv => 
+                        interp(r, env, denv, rv => 
                                           k(numAdd(lv, rv))
-                        })
-      })
+                        )
+      )
     case Sub(l, r) =>
       interp(l, env, denv, lv => {
-                        
-                        interp(r, env, denv, rv => {
-                                          
+                        interp(r, env, denv, rv => {          
                                            k(numSub(lv, rv))
                         })
       })
