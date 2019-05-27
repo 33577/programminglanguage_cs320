@@ -115,7 +115,7 @@ package object hw09 extends Homework09 {
       // val newTyEnv = TypeEnv( tyEnvT.vars ++ constructors map { case (v, t) => (v, ArrowT(t, IdT(name)))}, tyEnvT.tbinds )
       // typeCheckwithTyEnv(body, newTyEnv)
       val tyEnvV = tyEnvT.addVarsFromMap(constructors map { case (v, t) => 
-        validType(t, tyEnv);
+        validType(t, tyEnvT);
         (v, ArrowT(t, IdT(name))) 
       })
       typeCheckwithTyEnv(body, tyEnvV)
