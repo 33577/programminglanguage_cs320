@@ -115,7 +115,8 @@ package object hw09 extends Homework09 {
     case Rec(fname, fty, pname, pty, body) =>
       validType(fty, tyEnv)
       validType(pty, tyEnv)
-      val newTyEnv = TypeEnv(tyEnv.vars + (fname->fty) + (pname->pty), tyEnv.tbinds)
+      // val newTyEnv = TypeEnv(tyEnv.vars + (fname->fty) + (pname->pty), tyEnv.tbinds)
+      val newTyEnv = TypeEnv(tyEnv.addVar(fname, fty).addVar(pname, pty).vars, tyEnv.tbinds)
       mustSame(fty, ArrowT(pty, 
                               typeCheckwithTyEnv(body, newTyEnv)))
     case WithType(name, constructors, body) =>  
@@ -306,5 +307,7 @@ package object hw09 extends Homework09 {
                  {apple {x} x}}
           }
         }"""), "1")
+
+    
   }
 }
