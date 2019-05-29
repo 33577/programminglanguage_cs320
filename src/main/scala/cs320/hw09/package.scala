@@ -10,7 +10,7 @@ package object hw09 extends Homework09 {
 
   type Env = Map[String, CORELValue]
   type Cont = CORELValue => CORELValue
-  // type TypeEnv = Map[String, Type]
+
   case class TypeEnv(
       vars  : Map[String, Type] = Map(),
       tbinds: Map[String, Map[String, Type]] = Map()
@@ -71,6 +71,14 @@ package object hw09 extends Homework09 {
       else notype(s"$x is a free type")
   }
 
+  def occurs(t1: IdT, t2: Type): Boolean = 
+    t2 match {
+      case NumT => false
+      case BoolT => false
+      case ArrowT(l, r) => occurs(t1, l) || occurs(t1, r)
+      case IdT(ty) => t1.name == ty
+  }
+
   def typeCheckwithTyEnv(corel: COREL, tyEnv: TypeEnv): Type = corel match {
     case Num(_) => NumT
     case Bool(_) => BoolT
@@ -89,7 +97,7 @@ package object hw09 extends Homework09 {
     case With(name, t, expr, body) => 
       validType(t, tyEnv)
       typeCheckwithTyEnv(body, tyEnv.addVar(name, t))
-    case Id(x) => tyEnv.vars.getOrElse(x, notype(s"$x is a free identifier")) // tbinds에 x가 있는 경우는 체크 안 해도 되나? 
+    case Id(x) => tyEnv.vars.getOrElse(x, notype(s"$x is a free identifier"))
     case Fun(p, pt, b) => 
       validType(pt, tyEnv)
       ArrowT(pt, typeCheckwithTyEnv(b, tyEnv.addVar(p, pt)))
@@ -110,17 +118,18 @@ package object hw09 extends Homework09 {
       val newTyEnv = TypeEnv(tyEnv.vars + (fname->fty) + (pname->pty), tyEnv.tbinds)
       mustSame(fty, ArrowT(pty, 
                               typeCheckwithTyEnv(body, newTyEnv)))
-    case WithType(name, constructors, body) => 
+    case WithType(name, constructors, body) =>  
       val tyEnvT = tyEnv.addTBind(name, constructors)
-      // val newTyEnv = TypeEnv( tyEnvT.vars ++ constructors map { case (v, t) => (v, ArrowT(t, IdT(name)))}, tyEnvT.tbinds )
-      // typeCheckwithTyEnv(body, newTyEnv)
       val tyEnvV = tyEnvT.addVarsFromMap(constructors map { case (v, t) => 
         validType(t, tyEnvT);
         (v, ArrowT(t, IdT(name))) 
       })
-      typeCheckwithTyEnv(body, tyEnvV)
+      val bodyT = typeCheckwithTyEnv(body, tyEnvV)
+      // Soundness check
+      if (!occurs(IdT(name), bodyT)) bodyT
+      else error(s"[TC/WithType] No new type in body type")
     case Cases(name, dispatchE, cases) =>  
-      val cs = tyEnv.tbinds.getOrElse(name, notype(s"[TC/tbinds] $name is a free type"))
+      val cs = tyEnv.tbinds.getOrElse(name, notype(s"[TC/Cases/tbinds] $name is a free type"))
       mustSame(typeCheckwithTyEnv(dispatchE, tyEnv), IdT(name))
 
       val returnTypes: List[Type] = cases.map { // (x, (v, e)) (variant, (param, body))
@@ -129,9 +138,8 @@ package object hw09 extends Homework09 {
       // not all cases 
       if (cs.size != cases.size) error(s"not all cases")
 
-      mustSameList(returnTypes) // check every returnTypes[i] is same with returnTypes[i-1]
-
-      
+      // check every returnTypes[i] is same with returnTypes[i-1]
+      mustSameList(returnTypes)
   }
 
   def e2v(corel: COREL, env: Env): CORELValue = corel match {
@@ -164,7 +172,8 @@ package object hw09 extends Homework09 {
     case Cases(c, dispatchE, cases) => // cases: Map(x, (v, e))
       e2v(dispatchE, env) match {
         case VariantV(name, av) => 
-          val (y, e) = cases(name)
+          // val (y, e) = cases(name)
+          val (y, e) = cases.getOrElse(name, error(s"[Intp] no such case")) 
           e2v(e, env + (y->av))
         case v => error(s"not a variant: $v")      
       }
@@ -180,13 +189,7 @@ package object hw09 extends Homework09 {
       case ConstructorV(_) => "constructor"
     }
   }
-  
 
-  // for type test 
-  // def ));test(true, same(typeCheck(expr: String, ty: String): Unit =
-  //   test(same(typeCheck(expr), Type(ty)), true)
-  // def typeTestExc(expr: String): Unit =
-  //   testExc(typeCheck(expr), "")
 
   def tests: Unit = {
     test(run("42"), "42")
@@ -224,6 +227,13 @@ package object hw09 extends Homework09 {
         {cases fruit {apple 1}
                {apple {x} {+ x 1}}
                {banana {y} y}}}"""), "2")
+    testExc(run("""
+      {withtype
+        {fruit {apple num}
+               {banana num}}
+        {cases fruit {gam 1}
+               {apple {x} {+ x 1}}
+               {banana {y} y}}}"""), "no type") // gam is free identifier
     test(run("""
       {withtype
         {fruit {apple num}
@@ -246,10 +256,55 @@ package object hw09 extends Homework09 {
                }}"""), "no type")
     testExc(run("{fun {x: a} x}"), "no type")
     testExc(run("{if true 1 false}"), "no type")
-    test(run("{withtype {fruit {apple num}} apple}"), "constructor") // error 인가?
+    // test(run("{withtype {fruit {apple num}} apple}"), "constructor")
+    testExc(run("{withtype {fruit {apple num}} apple}"), "[TC/WithType] No new type in body type")
+    test(run("{withtype {fruit {apple num}} 1}"), "1")
+    testExc(run("{withtype {fruit {apple num}} fruit}"), "no type") // error
+
     test(run("{{recfun {f: {num -> num} x: num} {if {= x 0} 0 {+ x {f {- x 1}}}}} 10}"), "55")
-
-
     
+    testExc(run("""
+      {{withtype {foo {a num} {b num}}
+           {fun {x : foo}
+                {cases foo x
+                   {a {n} {+ n 3}}
+                   {b {n} {+ n 4}}}}}
+          {withtype {foo {c num} {d num}}
+           {c 1}}}"""), "[TC/WithType] No new type in body type")
+    testExc(run("""
+      {{withtype {foo {a num} {b num}}
+           {fun {x : foo}
+                {cases foo x
+                   {a {n} {+ n 3}}
+                   {b {n} {+ n 4}}}}}
+          {withtype {foo {c {num -> num}} {d num}}
+           {c {fun {y : num} y}}}}"""), "[TC/WithType] No new type in body type")
+
+    test(occurs(IdT("t1"), IdT("t1")), true)
+    testExc(run("""
+      {withtype
+        {fruit {apple num}
+               {banana num}
+               {gam bool}}
+        {cases fruit {gam true}
+               {apple {x} 1}
+               {banana {x} true}
+               {gam {x} 1}
+               }}"""), "no type")
+
+    test(run("""
+      {withtype
+        {fruit {apple bool}
+               {banana num}
+               }
+        {
+          withtype
+          {fruit {gam num}
+                 {apple num} }
+          {cases fruit {gam 1}
+                 {gam {x} x}
+                 {apple {x} x}}
+          }
+        }"""), "1")
   }
 }
