@@ -79,6 +79,15 @@ package object hw09 extends Homework09 {
       case IdT(ty) => t1.name == ty
   }
 
+  // 순서를 고려하지 않고 ele가 같은지 검사 
+  def sameSet(l1: List[String], l2: List[String]): Boolean = 
+    if (l1.size!=l2.size) false
+    else if (l1.size == 1) l1(0) == l2(0) 
+    else l1 match {
+      case f::rest => l2.contains(f) && sameSet(rest, l2 diff List(f))
+      case _ => error(s"error on sameSet")
+    }
+
   def typeCheckwithTyEnv(corel: COREL, tyEnv: TypeEnv): Type = corel match {
     case Num(_) => NumT
     case Bool(_) => BoolT
@@ -115,7 +124,6 @@ package object hw09 extends Homework09 {
     case Rec(fname, fty, pname, pty, body) =>
       validType(fty, tyEnv)
       validType(pty, tyEnv)
-      // val newTyEnv = TypeEnv(tyEnv.vars + (fname->fty) + (pname->pty), tyEnv.tbinds)
       val newTyEnv = TypeEnv(tyEnv.addVar(fname, fty).addVar(pname, pty).vars, tyEnv.tbinds)
       mustSame(fty, ArrowT(pty, 
                               typeCheckwithTyEnv(body, newTyEnv)))
@@ -126,9 +134,11 @@ package object hw09 extends Homework09 {
         (v, ArrowT(t, IdT(name))) 
       })
       val bodyT = typeCheckwithTyEnv(body, tyEnvV)
+
       // Soundness check
       if (!occurs(IdT(name), bodyT)) bodyT
       else error(s"[TC/WithType] No new type in body type")
+
     case Cases(name, dispatchE, cases) =>  
       val cs = tyEnv.tbinds.getOrElse(name, notype(s"[TC/Cases/tbinds] $name is a free type"))
       mustSame(typeCheckwithTyEnv(dispatchE, tyEnv), IdT(name))
@@ -136,7 +146,7 @@ package object hw09 extends Homework09 {
       val returnTypes: List[Type] = cases.map { // (x, (v, e)) (variant, (param, body))
         case (x, (v, e)) => typeCheckwithTyEnv(e, tyEnv.addVar(v, cs.getOrElse(x, notype(s"[TC] $x is a free type"))))} toList
       
-      // not all cases 
+      // not all cases  위에서 tbinds에 있는 것만 나오는게 확정 되었으므로 갯수만 체크해도 된다.
       if (cs.size != cases.size) error(s"not all cases")
 
       // check every returnTypes[i] is same with returnTypes[i-1]
@@ -281,7 +291,6 @@ package object hw09 extends Homework09 {
           {withtype {foo {c {num -> num}} {d num}}
            {c {fun {y : num} y}}}}"""), "[TC/WithType] No new type in body type")
 
-    test(occurs(IdT("t1"), IdT("t1")), true)
     testExc(run("""
       {withtype
         {fruit {apple num}
@@ -308,6 +317,59 @@ package object hw09 extends Homework09 {
           }
         }"""), "1")
 
-    
+    testExc(run("""
+      {withtype
+        {fruit {apple num}
+               {banana num}}
+        {cases fruit {apple 1}
+               {apple {x} x}
+               {appl {x} {+ x 1}}
+               }}"""), "no type")
+    testExc(run("""
+      {withtype
+        {fruit {apple num}
+               {banana num}}
+        {cases fruit {apple 1}
+               {apple {x} x}
+               {apple {x} {+ x 1}}
+               }}"""), "not all cases")
+    test(run("{with {x : num 1} x}"), "1")
+
+    test(run("{with {podo : {num -> num} {fun {x: num} 3}} 1}"), "1")
+    testExc(run(
+        """{ with {podo : {num -> num} {fun {x: num} 3}} 
+          {withtype {fruit {apple num} {banana num}}
+            {cases fruit {apple 1}
+                   {apple {x} 1}
+                   {podo {x} 2}
+            }
+        }}
+    """), "no type") // 개수는 같은데 not all cases 오류 내야 하는 경우를 만들 수 있을까? 없는거 같아
+
+    //piazza
+    testExc(run("""
+    {withtype {fruit {apple num}
+                          {banana num}}
+    {withtype{food {apple num}
+                            {banana bool}}
+    {+
+    {cases fruit {banana 4}
+                      {apple {x} {+ x 4}}
+                      {banana {x} {+ x 0}}}
+    {cases food {banana true}
+                      {apple {x} {+ x 10}}
+                      {banana {x} {if x 10 0}}
+    }}}}"""), "no type")
+
+    // test functions
+    test(occurs(IdT("t1"), IdT("t1")), true)
+
+    test(sameSet(List("a", "b", "c"), List("a", "b", "c")), true)
+    test(sameSet(List("a", "b", "c"), List("b", "c", "a")), true)
+
+    test(sameSet(List("a", "b", "c"), List("a", "b", "b")), false)
+    test(sameSet(List("a", "b"), List("a", "b", "c")), false)
+    test(sameSet(List("a", "b", "c"), List("a", "b", "d")), false)
+
   }
 }

@@ -127,8 +127,10 @@ package object hw07 extends Homework07 {
     test(run("{{fun {f x} {f f x}} {fun {g y} {if0 {- y 1} 1 {+ y {g g {- y 1}}}}} 10}"), "55")
     test(run("{try {if0 {throw} 1 2} catch 5}"), "5")
 
+    test(run("{withcc done {{withcc esc {done { + 1 {withcc k {esc k }}}}} 3}}"), "4")
 
-
+    test(run("{{withcc esc {withcc k {esc k }}} 3}"), "4")
+    test(run("{withcc esc { + 1 {withcc k {esc k }}}}"), "continuation")
     //
     test(run("{{fun {x y} {- y x}} 10 12}"), "2")
 test(run("{fun {} 12}"), "function")

@@ -1,9 +1,0 @@
-compile
-run
-last compile:run
-tests
-reload
-tests
-cd cd src
-run
-3+5
